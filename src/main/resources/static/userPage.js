@@ -2,27 +2,21 @@ $(async function() {
     await thisUser();
 });
 async function thisUser() {
-    fetch("http://localhost:8080/api/viewUser")
+    fetch("http://localhost:8080/api/user")
         .then(res => res.json())
         .then(data => {
-            // Добавляем информацию в шапку
             $('#headerUsername').append(data.username);
-            let roles = data.roles.map(role => " " + role.role.substring(5));
+            let roles = data.roles.map(role => role.name.substring(5).concat(" ")).toString().replaceAll(",", "");
             $('#headerRoles').append(roles);
 
-            //Добавляем информацию в таблицу
             let user = `$(
             <tr>
                 <td>${data.id}</td>
                 <td>${data.name}</td>
                 <td>${data.username}</td>
-                <td>${data.password}</td>
                 <td>${data.age}</td>
                 <td>${data.email}</td>
                 <td>${roles}</td>)`;
             $('#userPanelBody').append(user);
         })
 }
-
-
-

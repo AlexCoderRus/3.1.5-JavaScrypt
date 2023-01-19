@@ -1,21 +1,20 @@
-$('#edit').on('show.bs.modal', ev => {
+$('#delete').on('show.bs.modal', ev => {
     let button = $(ev.relatedTarget);
     let id = button.data('id');
-    showEditModal(id);
+    showDeleteModal(id);
 })
 
-async function showEditModal(id) {
-    $('#rolesEditUser').empty();
+async function showDeleteModal(id) {
     let user = await getUser(id);
-    let form = document.forms["formEditUser"];
+    let form = document.forms["formDeleteUser"];
     form.id.value = user.id;
     form.name.value = user.name;
     form.username.value = user.username;
-    form.password.value = user.password;
     form.age.value = user.age;
     form.email.value = user.email;
 
 
+    $('#rolesDeleteUser').empty();
 
     await fetch("http://localhost:8080/api/roles")
         .then(res => res.json())
@@ -29,11 +28,15 @@ async function showEditModal(id) {
                     }
                 }
                 let el = document.createElement("option");
-                el.text = role.role.substring(5);
+                el.text = role.name.substring(5);
                 el.value = role.id;
                 if (selectedRole) el.selected = true;
-                $('#rolesEditUser')[0].appendChild(el);
+                $('#rolesDeleteUser')[0].appendChild(el);
             })
-        })
+        });
 }
-
+async function getUser(id) {
+    let url = "http://localhost:8080/api/user/" + id;
+    let response = await fetch(url);
+    return await response.json();
+}

@@ -12,11 +12,10 @@ async function allUsers() {
                         <tr>
                             <td>${user.id}</td>
                             <td>${user.name}</td>
-                            <td>${user.username}</td>
-                            <td>${user.password}</td>                                               
-                            <td>${user.age}</td>
+                            <td>${user.username}</td>   
+                            <td>${user.age}</td>                      
                             <td>${user.email}</td>
-                            <td>${user.roles.map(role => " " + role.role.substring(5))}</td>
+                            <td>${user.roles.map(role => role.name.substring(5).concat(" ")).toString().replaceAll(",", "")}</td>
                             <td>
                                 <button type="button" class="btn btn-info" data-toggle="modal" id="buttonEdit"
                                 data-action="edit" data-id="${user.id}" data-target="#edit">Edit</button>

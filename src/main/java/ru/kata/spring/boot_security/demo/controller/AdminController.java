@@ -37,7 +37,7 @@ public class AdminController {
 
     @GetMapping
     public String adminPage() {
-        return "users";
+        return "adminPage";
     }
 
 //    @GetMapping("/new")

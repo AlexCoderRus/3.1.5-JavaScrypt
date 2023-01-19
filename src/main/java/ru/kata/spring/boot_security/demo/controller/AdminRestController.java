@@ -30,24 +30,24 @@ public class AdminRestController {
         return new ResponseEntity<>(userDetailServiceImp.allUser().stream().map(userDetailServiceImp :: convertToDTO).toList(), HttpStatus.OK);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<UserDto> findUser(@PathVariable Long id) {
         return new ResponseEntity<>(userDetailServiceImp.convertToDTO(userDetailServiceImp.findUserById(id)), HttpStatus.OK);
     }
 
-    @PostMapping("/users")
-    public ResponseEntity<UserDto> create (@ModelAttribute UserDto userDto) {
+    @PostMapping("/new")
+    public ResponseEntity<UserDto> create (@RequestBody UserDto userDto) {
         userDetailServiceImp.saveUser(userDetailServiceImp.convertToUser(userDto));
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<UserDto> update (@ModelAttribute UserDto userDto) {
+    @PatchMapping("/user/edit/{id}")
+    public ResponseEntity<UserDto> update (@RequestBody UserDto userDto, @PathVariable("id") Long id) {
         userDetailServiceImp.update(userDetailServiceImp.convertToUser(userDto));
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/user/delete/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         userDetailServiceImp.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -58,10 +58,10 @@ public class AdminRestController {
         return new ResponseEntity<>(roleService.findAllRoles(), HttpStatus.OK);
     }
 
-    @GetMapping("/roles/{id}")
-    ResponseEntity<Role> getRoleById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(roleService.findRoleById(id), HttpStatus.OK);
-    }
+//    @GetMapping("/roles/{id}")
+//    ResponseEntity<Role> getRoleById(@PathVariable("id") Long id){
+//        return new ResponseEntity<>(roleService.findRoleById(id), HttpStatus.OK);
+//    }
 
 
 }

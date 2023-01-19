@@ -7,7 +7,7 @@ async function newUser() {
         .then(roles => {
             roles.forEach(role => {
                 let el = document.createElement("option");
-                el.text = role.role.substring(5);
+                el.text = role.name.substring(5);
                 el.value = role.id;
                 $('#newUserRoles')[0].appendChild(el);
             })
@@ -20,13 +20,15 @@ async function newUser() {
     function addNewUser(e) {
         e.preventDefault();
         let newUserRoles = [];
-        for (let i = 0; i < form.roles.options.length; i++) {
-            if (form.roles.options[i].selected) newUserRoles.push({
-                id : form.roles.options[i].value,
-                name : form.roles.options[i].name
-            })
+        if (form.roles !== undefined) {
+            for (let i = 0; i < form.roles.options.length; i++) {
+                if (form.roles.options[i].selected) newUserRoles.push({
+                    id: form.roles.options[i].value,
+                    name: form.roles.options[i].text
+                })
+            }
         }
-        fetch("http://localhost:8080/api/users", {
+        fetch("http://localhost:8080/api/new", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,9 +36,9 @@ async function newUser() {
             body: JSON.stringify({
                 name: form.name.value,
                 username: form.username.value,
-                password: form.password.value,
                 age: form.age.value,
                 email: form.email.value,
+                password: form.password.value,
                 roles: newUserRoles
             })
         }).then(() => {

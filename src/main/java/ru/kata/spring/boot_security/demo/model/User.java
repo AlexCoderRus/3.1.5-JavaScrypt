@@ -51,7 +51,6 @@ public class User implements UserDetails {
     }
 
     public void addRole(List<Role> role) {
-        this.roles.clear();
         this.roles = role;
     }
 

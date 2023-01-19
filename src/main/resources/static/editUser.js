@@ -7,15 +7,17 @@ function editUser() {
     editForm.addEventListener("submit", ev => {
         ev.preventDefault();
         let editUserRoles = [];
-        for (let i = 0; i < editForm.roles.options.length; i++) {
-            if (editForm.roles.options[i].selected) editUserRoles.push({
-                id : editForm.roles.options[i].value,
-                name : "ROLE_" + editForm.roles.options[i].text
-            })
+        if (editForm.roles !== undefined) {
+            for (let i = 0; i < editForm.roles.options.length; i++) {
+                if (editForm.roles.options[i].selected) editUserRoles.push({
+                    id: editForm.roles.options[i].value,
+                    role: "ROLE_" + editForm.roles.options[i].text
+                })
+            }
         }
 
-        fetch("http://localhost:8080/api/users/" + editForm.id.value, {
-            method: 'PUT',
+        fetch("http://localhost:8080/api/user/edit/" + editForm.id.value, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -23,9 +25,9 @@ function editUser() {
                 id: editForm.id.value,
                 name: editForm.name.value,
                 username: editForm.username.value,
-                password: editForm.password.value,
                 age: editForm.age.value,
                 email: editForm.email.value,
+                password: editForm.password.value,
                 roles: editUserRoles
             })
         }).then(() => {
