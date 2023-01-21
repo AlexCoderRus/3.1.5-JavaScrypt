@@ -9,17 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.kata.spring.boot_security.demo.service.UserDetailServiceImp;
+import ru.kata.spring.boot_security.demo.service.UserDetailServiceInterface;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailServiceImp userDetailServiceImp;
+    private final UserDetailServiceInterface userDetailServiceInterface;
     private final SuccessUserHandler successUserHandler;
 
     public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailServiceImp userDetailServiceImp) {
         this.successUserHandler = successUserHandler;
-        this.userDetailServiceImp = userDetailServiceImp;
+        this.userDetailServiceInterface = userDetailServiceImp;
     }
 
     @Override
@@ -28,9 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**", "/user", "/api/**").hasRole("ADMIN")
+                .antMatchers("/admin/**", "/api/**").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/login", "/error").permitAll()
-                .antMatchers("/onlyUser").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
@@ -51,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(passwordEncoder());
-        authenticationProvider.setUserDetailsService(userDetailServiceImp);
+        authenticationProvider.setUserDetailsService(userDetailServiceInterface);
         return authenticationProvider;
     }
 }

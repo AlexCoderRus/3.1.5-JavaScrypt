@@ -12,11 +12,8 @@ async function newUser() {
                 $('#newUserRoles')[0].appendChild(el);
             })
         })
-
     const form = document.forms["formNewUser"];
-
     form.addEventListener('submit', addNewUser)
-
     function addNewUser(e) {
         e.preventDefault();
         let newUserRoles = [];
@@ -24,11 +21,11 @@ async function newUser() {
             for (let i = 0; i < form.roles.options.length; i++) {
                 if (form.roles.options[i].selected) newUserRoles.push({
                     id: form.roles.options[i].value,
-                    name: form.roles.options[i].text
+                    name: "ROLE_" + form.roles.options[i].text
                 })
             }
         }
-        fetch("http://localhost:8080/api/new", {
+        fetch("http://localhost:8080/api/add", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -47,5 +44,4 @@ async function newUser() {
             $('#allUsersTable').click();
         })
     }
-
 }

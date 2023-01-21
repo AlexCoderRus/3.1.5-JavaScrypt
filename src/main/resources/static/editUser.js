@@ -11,7 +11,7 @@ function editUser() {
             for (let i = 0; i < editForm.roles.options.length; i++) {
                 if (editForm.roles.options[i].selected) editUserRoles.push({
                     id: editForm.roles.options[i].value,
-                    role: "ROLE_" + editForm.roles.options[i].text
+                    name: "ROLE_" + editForm.roles.options[i].text
                 })
             }
         }
@@ -27,8 +27,9 @@ function editUser() {
                 username: editForm.username.value,
                 age: editForm.age.value,
                 email: editForm.email.value,
-                password: editForm.password.value,
-                roles: editUserRoles
+                roles: editUserRoles,
+                password: editForm.password.value
+
             })
         }).then(() => {
             $('#editFormCloseButton').click();

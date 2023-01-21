@@ -9,7 +9,6 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body>
-<!--Заголовок-->
 <header>
 <div class="container-fluid">
     <div class="row">
@@ -22,29 +21,22 @@
     </div>
 </div>
 </header>
-        <!--Сетка слева с ADMIN и USER-->
         <div class="container-fluid">
             <div class="row">
-                <!--Маркер #adminPanel на кнопку-->
                 <div class="col-2" style="padding: 0; padding-top: 15px">
                     <ul class="nav nav-pills flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#adminPanel">Admin</a>
                         </li>
-                        <!--Маркер #userPanel на кнопку-->
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#userPanel">User</a>
                         </li>
                     </ul>
                 </div>
 
-                <!--Работа с маркерами(admin, user)-->
 
                 <div class="col-10 bg-light">
                     <div class="tab-content" style="padding-top: 15px; height: 100vh">
-
-                        <!--Panel Admin-->
-
                         <div class="tab-pane fade show active" id="adminPanel">
                             <h2>Admin panel</h2>
                             <ul class="nav nav-tabs">
@@ -57,9 +49,6 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
-
-                                <!--Таблица пользователей-->
-
                                 <div class="tab-pane fade show active" id="allUsers">
                                     <div class="card">
                                         <h5 class="card-header">All users</h5>
@@ -83,10 +72,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <!--Вкладка для нового пользователя-->
-
                                 <div class="tab-pane fade" id="newUser">
                                     <div class="form-group">
                                         <div class="control-group required">
@@ -157,9 +142,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--Панель пользователя-->
-
                         <div class="tab-pane fade" id="userPanel">
                             <h2>User information-page</h2>
                             <div class="card">
@@ -186,9 +168,6 @@
                 </div>
             </div>
         </div>
-
-        <!--Модальное окно Edit-->
-
         <div class="modal fade" id="edit" tabindex="-1" role="dialog"
              aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -260,9 +239,6 @@
                 </div>
             </div>
         </div>
-
-        <!--Модальное окно Delete-->
-
         <div class="modal fade" id="delete" tabindex="-1" role="dialog"
              aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

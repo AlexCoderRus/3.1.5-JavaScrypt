@@ -13,7 +13,6 @@ async function showDeleteModal(id) {
     form.age.value = user.age;
     form.email.value = user.email;
 
-
     $('#rolesDeleteUser').empty();
 
     await fetch("http://localhost:8080/api/roles")

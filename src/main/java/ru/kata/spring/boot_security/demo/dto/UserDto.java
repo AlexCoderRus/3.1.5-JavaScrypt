@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.dto;
 
-import lombok.Data;
 import ru.kata.spring.boot_security.demo.model.Role;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,7 +15,7 @@ import org.modelmapper.ModelMapper;
 import java.util.*;
 
 @Service
-public class UserDetailServiceImp implements UserDetailsService {
+public class UserDetailServiceImp implements UserDetailServiceInterface {
 
     private final UserRepository userRepository;
 
@@ -31,7 +30,8 @@ public class UserDetailServiceImp implements UserDetailsService {
     }
 
 
-    private Optional<User> findByUserName(String name) {
+    @Override
+    public Optional<User> findByUserName(String name) {
         return userRepository.findByUsername(name);
     }
 
@@ -46,17 +46,20 @@ public class UserDetailServiceImp implements UserDetailsService {
         return user.get();
     }
 
+    @Override
     @Transactional(readOnly = true)
     public User findUserById(Long id) {
         Optional<User> userById = userRepository.findById(id);
         return userById.orElse(new User());
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<User> allUser() {
         return userRepository.findAll();
     }
 
+    @Override
     @Transactional
     public boolean saveUser(User user) {
         Optional<User> userFromDB = userRepository.findByUsername(user.getUsername());
@@ -69,6 +72,7 @@ public class UserDetailServiceImp implements UserDetailsService {
         return true;
     }
 
+    @Override
     @Transactional
     public boolean deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
@@ -80,6 +84,7 @@ public class UserDetailServiceImp implements UserDetailsService {
         return false;
     }
 
+    @Override
     @Transactional
     public void update(User user) {;
         if (user.getPassword().isEmpty()) {
@@ -90,10 +95,12 @@ public class UserDetailServiceImp implements UserDetailsService {
         userRepository.save(user);
     }
 
+    @Override
     public User convertToUser(UserDto userDTO) {
         return mapper.map(userDTO, User.class);
     }
 
+    @Override
     public UserDto convertToDTO(User user) {
         return mapper.map(user, UserDto.class);
     }
