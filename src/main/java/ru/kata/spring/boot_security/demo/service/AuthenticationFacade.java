@@ -1,9 +1,8 @@
-package ru.kata.spring.boot_security.demo.util;
+package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 @Component
 public class AuthenticationFacade implements AuthantivationFacadeI{

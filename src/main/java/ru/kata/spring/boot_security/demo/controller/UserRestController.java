@@ -8,8 +8,8 @@ import ru.kata.spring.boot_security.demo.dto.UserDto;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserDetailServiceImp;
 import ru.kata.spring.boot_security.demo.service.UserDetailServiceInterface;
-import ru.kata.spring.boot_security.demo.util.AuthantivationFacadeI;
-import ru.kata.spring.boot_security.demo.util.AuthenticationFacade;
+import ru.kata.spring.boot_security.demo.service.AuthantivationFacadeI;
+import ru.kata.spring.boot_security.demo.service.AuthenticationFacade;
 
 @RestController
 public class UserRestController {
