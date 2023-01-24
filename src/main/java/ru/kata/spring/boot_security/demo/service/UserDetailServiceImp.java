@@ -104,6 +104,4 @@ public class UserDetailServiceImp implements UserDetailServiceInterface {
     public UserDto convertToDTO(User user) {
         return mapper.map(user, UserDto.class);
     }
-
-
 }

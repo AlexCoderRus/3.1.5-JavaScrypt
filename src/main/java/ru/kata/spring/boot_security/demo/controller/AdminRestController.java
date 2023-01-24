@@ -5,10 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.dto.UserDto;
 import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.service.RoleService;
-import ru.kata.spring.boot_security.demo.service.RoleServiceInterface;
-import ru.kata.spring.boot_security.demo.service.UserDetailServiceImp;
-import ru.kata.spring.boot_security.demo.service.UserDetailServiceInterface;
+import ru.kata.spring.boot_security.demo.service.*;
 
 import java.util.List;
 
@@ -16,34 +13,37 @@ import java.util.List;
 @RequestMapping("/api")
 public class AdminRestController {
 
+    private final UserDtoService userDtoService;
+
     private final UserDetailServiceInterface userDetailServiceImp;
 
     private final RoleServiceInterface roleService;
 
-    public AdminRestController(UserDetailServiceImp userDetailServiceImp, RoleService roleService) {
+    public AdminRestController(UserDtoServiceImp userDtoServiceImp, UserDetailServiceImp userDetailServiceImp, RoleService roleService) {
+        this.userDtoService = userDtoServiceImp;
         this.userDetailServiceImp = userDetailServiceImp;
         this.roleService = roleService;
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDto>> allUsers () {
-        return new ResponseEntity<>(userDetailServiceImp.allUser().stream().map(userDetailServiceImp :: convertToDTO).toList(), HttpStatus.OK);
+        return new ResponseEntity<>(userDtoService.allUserDto(), HttpStatus.OK);
     }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDto> findUser(@PathVariable Long id) {
-        return new ResponseEntity<>(userDetailServiceImp.convertToDTO(userDetailServiceImp.findUserById(id)), HttpStatus.OK);
+        return new ResponseEntity<>(userDtoService.findUserById(id), HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<UserDto> create (@RequestBody UserDto userDto) {
-        userDetailServiceImp.saveUser(userDetailServiceImp.convertToUser(userDto));
+        userDtoService.saveUserDto(userDto);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
     @PatchMapping("/user/edit/{id}")
     public ResponseEntity<UserDto> update (@RequestBody UserDto user, @PathVariable("id") Long id) {
-        userDetailServiceImp.update(userDetailServiceImp.convertToUser(user));
+       userDtoService.updateDto(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
@@ -57,5 +57,4 @@ public class AdminRestController {
     public ResponseEntity<List<Role>> getAllRoles() {
         return new ResponseEntity<>(roleService.findAllRoles(), HttpStatus.OK);
     }
-
 }

@@ -13,9 +13,7 @@ import ru.kata.spring.boot_security.demo.service.AuthenticationFacade;
 
 @RestController
 public class UserRestController {
-
     private final AuthantivationFacadeI authantivationFacadeI;
-
     private final UserDetailServiceInterface userDetailServiceInterface;
 
     public UserRestController(AuthenticationFacade authenticationFacade, UserDetailServiceImp userDetailService) {

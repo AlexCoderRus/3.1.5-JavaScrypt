@@ -1,17 +1,13 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.kata.spring.boot_security.demo.model.User;
 @Controller
 public class UserController {
 
 
     @RequestMapping("/user")
-    public String mainPageUserInfo(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("user", user);
+    public String mainPageUserInfo() {
         return "user";
     }
 }
