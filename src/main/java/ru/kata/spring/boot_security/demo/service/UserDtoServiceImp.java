@@ -1,9 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.dto.UserDto;
-import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 
@@ -12,8 +10,8 @@ public class UserDtoServiceImp implements UserDtoService{
 
     private final UserDetailServiceInterface userDetailServiceInterface;
 
-    public UserDtoServiceImp(UserDetailServiceImp userDetailServiceImp) {
-        this.userDetailServiceInterface = userDetailServiceImp;
+    public UserDtoServiceImp(UserDetailServiceInterface userDetailServiceInterface) {
+        this.userDetailServiceInterface = userDetailServiceInterface;
     }
 
     @Override

@@ -19,9 +19,9 @@ public class AdminRestController {
 
     private final RoleServiceInterface roleService;
 
-    public AdminRestController(UserDtoServiceImp userDtoServiceImp, UserDetailServiceImp userDetailServiceImp, RoleService roleService) {
-        this.userDtoService = userDtoServiceImp;
-        this.userDetailServiceImp = userDetailServiceImp;
+    public AdminRestController(UserDtoService userDtoService, UserDetailServiceInterface userDetailServiceInterface, RoleService roleService) {
+        this.userDtoService = userDtoService;
+        this.userDetailServiceImp = userDetailServiceInterface;
         this.roleService = roleService;
     }
 

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.dto.UserDto;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserDetailServiceImp;
 import ru.kata.spring.boot_security.demo.service.UserDetailServiceInterface;
 import ru.kata.spring.boot_security.demo.service.AuthantivationFacadeI;
 import ru.kata.spring.boot_security.demo.service.AuthenticationFacade;
@@ -16,9 +15,9 @@ public class UserRestController {
     private final AuthantivationFacadeI authantivationFacadeI;
     private final UserDetailServiceInterface userDetailServiceInterface;
 
-    public UserRestController(AuthenticationFacade authenticationFacade, UserDetailServiceImp userDetailService) {
+    public UserRestController(AuthenticationFacade authenticationFacade, UserDetailServiceInterface userDetailServiceInterface) {
         this.authantivationFacadeI = authenticationFacade;
-        this.userDetailServiceInterface = userDetailService;
+        this.userDetailServiceInterface = userDetailServiceInterface;
     }
 
 
